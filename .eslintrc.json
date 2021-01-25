@@ -22,6 +22,18 @@
     // Place to specify and overwrite ESLint rules
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "quotes": [2, "single", {"avoidEscape": true}],
+    "prettier/prettier": [
+      "warn",
+      {
+        "singleQuote": true,
+        "semi": true,
+        "trailingComma": "none",
+        "jsxSingleQuote": true,
+        "bracketSpacing": false
+      }
+    ],
+    "jsx-quotes": ["warn", "prefer-single"]
   }
 }
