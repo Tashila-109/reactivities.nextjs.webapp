@@ -1,4 +1,4 @@
-import '../styles/globals.css';
+import '../layout/styles/styles.css';
 import 'semantic-ui-css/semantic.min.css';
 
 // eslint-disable-next-line react/prop-types
