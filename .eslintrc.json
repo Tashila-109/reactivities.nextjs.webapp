@@ -31,7 +31,9 @@
         "semi": true,
         "trailingComma": "none",
         "jsxSingleQuote": true,
-        "bracketSpacing": false
+        "bracketSpacing": false,
+        "tabWidth": 2,
+        "arrowParens": "avoid"
       }
     ],
     "jsx-quotes": ["warn", "prefer-single"]
