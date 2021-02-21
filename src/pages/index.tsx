@@ -1,16 +1,17 @@
 import {useState, useEffect} from 'react';
 import Head from 'next/head';
-import {Header, Icon, List} from 'semantic-ui-react';
+import {List} from 'semantic-ui-react';
 import axios from 'axios';
 
-import {IActivity} from '../models/activity';
+import {Activity} from '../models/activity';
+import NavBar from '../Components/NavBar';
 
 const Home = () => {
-  const [activities, setActivities] = useState<IActivity[]>([]);
+  const [activities, setActivities] = useState<Activity[]>([]);
 
   useEffect(() => {
     axios
-      .get<IActivity[]>('http://localhost:5000/api/activities')
+      .get<Activity[]>('http://localhost:5000/api/activities')
       .then(response => {
         setActivities(response.data);
       });
@@ -22,15 +23,12 @@ const Home = () => {
         <title>Reactivities</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Header as='h2'>
-        <Icon name='users' />
-        <Header.Content>Reactivities</Header.Content>
-        <List>
-          {activities.map(activity => (
-            <List.Item key={activity.id}>{activity.title}</List.Item>
-          ))}
-        </List>
-      </Header>
+      <NavBar />
+      <List>
+        {activities.map(activity => (
+          <List.Item key={activity.id}>{activity.title}</List.Item>
+        ))}
+      </List>
     </div>
   );
 };
