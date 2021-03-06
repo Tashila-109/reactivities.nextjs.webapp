@@ -1,10 +1,11 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, Fragment} from 'react';
 import Head from 'next/head';
-import {List} from 'semantic-ui-react';
+import {Container} from 'semantic-ui-react';
 import axios from 'axios';
 
 import {Activity} from '../models/activity';
 import NavBar from '../Components/NavBar';
+import ActivityDashboard from '../features/activities/dashboard/ActivityDashboard';
 
 const Home = () => {
   const [activities, setActivities] = useState<Activity[]>([]);
@@ -18,18 +19,16 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <Fragment>
       <Head>
         <title>Reactivities</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <NavBar />
-      <List>
-        {activities.map(activity => (
-          <List.Item key={activity.id}>{activity.title}</List.Item>
-        ))}
-      </List>
-    </div>
+      <Container style={{marginTop: '7rem'}}>
+        <ActivityDashboard activities={activities} />
+      </Container>
+    </Fragment>
   );
 };
 
