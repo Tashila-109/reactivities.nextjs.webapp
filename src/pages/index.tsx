@@ -10,22 +10,30 @@ import ActivityDashboard from '../features/activities/dashboard/ActivityDashboar
 const Home = () => {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [selectedActivity, setSelectedActivity] = useState<Activity | undefined>(undefined);
+  const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
-    axios
-      .get<Activity[]>('http://localhost:5000/api/activities')
-      .then(response => {
-        setActivities(response.data);
-      });
+    axios.get<Activity[]>('http://localhost:5000/api/activities').then(response => {
+      setActivities(response.data);
+    });
   }, []);
 
   const handleSelectActivity = (id: string) => {
-    setSelectedActivity(activities.find(x => x.id === id))
-  }
+    setSelectedActivity(activities.find(x => x.id === id));
+  };
 
   const handleCancelSelectActivity = () => {
     setSelectedActivity(undefined);
-  }
+  };
+
+  const handleFormOpen = (id?: string) => {
+    id ? handleSelectActivity(id) : handleCancelSelectActivity();
+    setEditMode(true);
+  };
+
+  const handleFormClose = () => {
+    setEditMode(false);
+  };
 
   return (
     <Fragment>
@@ -33,14 +41,17 @@ const Home = () => {
         <title>Reactivities</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <NavBar />
+      <NavBar openForm={handleFormOpen} />
       <Container style={{marginTop: '7rem'}}>
-        <ActivityDashboard 
-        activities={activities}
-        selectedActivity={selectedActivity}
-        selectActivity={handleSelectActivity}
-        cancelSelectActivity={handleCancelSelectActivity}
-         />
+        <ActivityDashboard
+          activities={activities}
+          selectedActivity={selectedActivity}
+          selectActivity={handleSelectActivity}
+          cancelSelectActivity={handleCancelSelectActivity}
+          editMode={editMode}
+          openForm={handleFormOpen}
+          closeForm={handleFormClose}
+        />
       </Container>
     </Fragment>
   );
