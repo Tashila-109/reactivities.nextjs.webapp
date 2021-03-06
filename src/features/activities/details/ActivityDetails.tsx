@@ -8,7 +8,7 @@ interface Props {
   openForm: (id: string) => void;
 }
 
-const ActivityDetails = ({activity}: Props) => {
+const ActivityDetails = ({activity, cancelSelectActivity}: Props) => {
   return (
     <Card fluid>
       <Image src={`/assets/categoryImages/${activity.category}.jpg`} />
@@ -28,7 +28,7 @@ const ActivityDetails = ({activity}: Props) => {
             content='Edit'
           />
           <Button
-            // onClick={cancelSelectActivity}
+            onClick={cancelSelectActivity}
             basic
             color='grey'
             content='Cancel'

@@ -36,6 +36,7 @@
         "arrowParens": "avoid"
       }
     ],
-    "jsx-quotes": ["warn", "prefer-single"]
+    "jsx-quotes": ["warn", "prefer-single"],
+    "max-len": [{"code": 180}]
   }
 }
