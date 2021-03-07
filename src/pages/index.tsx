@@ -2,6 +2,7 @@ import {useState, useEffect, Fragment} from 'react';
 import Head from 'next/head';
 import {Container} from 'semantic-ui-react';
 import axios from 'axios';
+import {v4 as uuid} from 'uuid';
 
 import {Activity} from '../models/activity';
 import NavBar from '../Components/NavBar';
@@ -36,9 +37,15 @@ const Home = () => {
   };
 
   const handleCreateOrEditActivity = (activity: Activity) => {
-    activity.id ? setActivities([...activities.filter(x => x.id !== activity.id), activity]) : setActivities([...activities, activity]);
+    activity.id
+      ? setActivities([...activities.filter(x => x.id !== activity.id), activity])
+      : setActivities([...activities, {...activity, id: uuid()}]);
     setEditMode(false);
     setSelectedActivity(activity);
+  };
+
+  const handleDeleteActivity = (id: string) => {
+    setActivities([...activities.filter(x => x.id !== id)]);
   };
 
   return (
@@ -58,6 +65,7 @@ const Home = () => {
           openForm={handleFormOpen}
           closeForm={handleFormClose}
           createOrEdit={handleCreateOrEditActivity}
+          deleteActivity={handleDeleteActivity}
         />
       </Container>
     </Fragment>
