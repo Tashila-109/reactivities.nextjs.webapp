@@ -25,8 +25,7 @@ const ActivityList = ({activities, selectActivity, deleteActivity}: Props) => {
               </Item.Description>
               <Item.Extra>
                 <Button onClick={() => selectActivity(activity.id)} floated='right' content='View' color='blue' />
-                                <Button onClick={() => deleteActivity(activity.id)} floated='right' content='Delete' color='red' />
-
+                <Button onClick={() => deleteActivity(activity.id)} floated='right' content='Delete' color='red' />
                 <Label basic content={activity.category} />
               </Item.Extra>
             </Item.Content>

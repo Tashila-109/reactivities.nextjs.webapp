@@ -7,6 +7,7 @@ import {v4 as uuid} from 'uuid';
 import {Activity} from '../models/activity';
 import NavBar from '../Components/NavBar';
 import ActivityDashboard from '../features/activities/dashboard/ActivityDashboard';
+import agent from '../api/agent';
 
 const Home = () => {
   const [activities, setActivities] = useState<Activity[]>([]);
@@ -14,8 +15,8 @@ const Home = () => {
   const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
-    axios.get<Activity[]>('http://localhost:5000/api/activities').then(response => {
-      setActivities(response.data);
+    agent.Activities.list().then(response => {
+      setActivities(response);
     });
   }, []);
 
