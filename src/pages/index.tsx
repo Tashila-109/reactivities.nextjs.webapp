@@ -35,6 +35,12 @@ const Home = () => {
     setEditMode(false);
   };
 
+  const handleCreateOrEditActivity = (activity: Activity) => {
+    activity.id ? setActivities([...activities.filter(x => x.id !== activity.id), activity]) : setActivities([...activities, activity]);
+    setEditMode(false);
+    setSelectedActivity(activity);
+  };
+
   return (
     <Fragment>
       <Head>
@@ -51,6 +57,7 @@ const Home = () => {
           editMode={editMode}
           openForm={handleFormOpen}
           closeForm={handleFormClose}
+          createOrEdit={handleCreateOrEditActivity}
         />
       </Container>
     </Fragment>
